@@ -1,2 +1,1 @@
-# furry-sniffle
-VSD DrifterProject
+# VSD DrifterProject
