@@ -18,5 +18,6 @@ Jy = 500;
 Jx = 300;
 Jz = 600; %kg*m^2
 ca = 0.5 %air resistance
-ks = 
+ks = 40000;
+cs = sqrt(2*ks*M);
 %Jw = 80; %tire inertia
