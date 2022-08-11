@@ -6,8 +6,8 @@ mu_st = 0.8;
 mu_dyn = 0.4;
 k_r = 1e4; %no idea
 S = 0.13*0.2;
-k_tv = 400%4e4;
-k_tu = 1500%1.5e5;
+k_tv = 40000;%400;%4e4;
+k_tu = 1.5e5;%1500;%1.5e5;
 
 %body parameters
 M = 1000; %weight
