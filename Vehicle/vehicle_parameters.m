@@ -25,6 +25,7 @@ cs = sqrt(2*ks*M);
 
 
 
+
 L=sqrt(a^2+w^2 /4); 
 R=sqrt(b^2+w^2 /4);
 alpha=atan(w/(2*b));
