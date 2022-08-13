@@ -1,13 +1,13 @@
 %tyre parameters
-r=0.2;
+r=0.3;
 k_t=1.5e5; %longitudinal stiffness
-c=0.13;
+%c=0.2;%0.13;
 mu_st = 0.8;
-mu_dyn = 0.4;
-k_r = 1e4; %no idea
-S = 0.13*0.2;
-k_tv = 40000;%400;%4e4;
-k_tu = 1.5e5;%1500;%1.5e5;
+mu_dyn = 0.2;
+k_r = 200*1e4;%1e4; %no idea
+%S = 0.2*c;
+k_tv = 10*40000;%400;%4e4;
+k_tu = 10*1.5e5;%1500;%1.5e5;
 
 %body parameters
 M = 1000; %weight
