@@ -11,16 +11,16 @@ k_tv = 10*40000;%400;%4e4;
 k_tu = 10*1.5e5;%1500;%1.5e5;
 
 %body parameters
-M = 1000; %weight
+M = 1500; %weight
 w= 1.6;%wheel distance
 a = 1.3;%2;
 b = 1.8;%2.5
-h_gc = 0.15;
+h_gc = 0.35;
 Jy = 500;
 Jx = 300;
 Jz = 600; %kg*m^2
 ca = 0.5; %air resistance
-ks = 40000;
+ks = 39000;
 cs = sqrt(2*ks*M);
 %Jw = 80; %tire inertia
 J_wheel = 0.4;
