@@ -1,14 +1,22 @@
-clear all
-syms a b delta gamma gamma_front l delta_ R_rear R_front R
-
-  l = a+b;
+function value = gamma_calc(a, b, delta, gamma_front, R_real)
+syms a_s b_s delta_s gamma_s gamma_front_s l_s delta__s R_rear_s R_front_s R_s
+l = a+b;
+  l_s = a_s+b_s;
+delta__s = tan(delta_s+atan(gamma_front_s));
 delta_ = tan(delta+atan(gamma_front));
-R_rear = sqrt(l^2*(1+gamma^2)/(gamma-delta_)^2);
- R_front = sqrt((l/(gamma-delta_))^2+(gamma*l/(gamma-delta_)-l)^2);
-eq = R == (sqrt(l^2*(1+gamma^2)/(gamma-delta_)^2) * a + sqrt((l/(gamma-delta_))^2+(gamma*l/(gamma-delta_)-l)^2) * b)/l;
+% R_rear = sqrt(l^2*(1+gamma^2)/(gamma-delta_)^2);
+%  R_front = sqrt((l/(gamma-delta_))^2+(gamma*l/(gamma-delta_)-l)^2);
+eq = R_s == (sqrt(l_s^2*(1+gamma_s^2)/(gamma_s-delta__s)^2) * a_s + sqrt((l_s/(gamma_s-delta__s))^2+(gamma_s*l_s/(gamma_s-delta__s)-l_s)^2) * b_s)/l_s;
 
-eq = subs(eq, [l,  delta, gamma_front, a, b],[3,  0.2, -0.1, 1.5, 1.5])
+eq = subs(eq, [l_s,  delta__s, gamma_front_s, a_s, b_s],[l, delta_, gamma_front, a, b]);
+%eq = subs(eq, [l_s,  delta__s, gamma_front_s, a_s, b_s],[3, 0.1, -0.1, 1.5, 1.5])
 % R == (sqrt(l^2*(1+gamma^2)/(gamma-delta_)^2) * a + sqrt((l/(gamma-delta_))^2+(gamma*l/(gamma-delta_)-l)^2) * b)/l;
 
-value = solve(eq, gamma);
-value = subs(value, R, 3)
+value_ = solve(eq, gamma_s);
+value_ = subs(value_, R_s, R_real);
+value = eval(value_(1));
+% % syms z 
+% % temp = (a^4*tan(delta + atan(gamma_front))^2 - a^4 + R^2*a^2 + 3*R^2*b^2 + a^2*b^2 + 3*R^2*a^2*tan(delta + atan(gamma_front))^2 + 3*R^2*b^2*tan(delta + atan(gamma_front))^2 + a^2*b^2*tan(delta + atan(gamma_front))^2)/(2*a^2*tan(delta + atan(gamma_front))*(R^2 - a^2)) - (root(2*a*b*z^4*tan(delta + atan(gamma_front))^2 + 2*a*b*z^4 - b^2*z^4*tan(delta + atan(gamma_front))^2 - a^2*z^4*tan(delta + atan(gamma_front))^2 - b^2*z^4 - a^2*z^4 - 4*R*a*b*z^3*tan(delta + atan(gamma_front))^2 + 4*R*b^2*z^3*tan(delta + atan(gamma_front))^2 - 4*R*a*b*z^3 + 4*R*b^2*z^3 + 2*a^2*b^2*z^2*tan(delta + atan(gamma_front))^2 - 6*R^2*b^2*z^2*tan(delta + atan(gamma_front))^2 + 2*R^2*a^2*z^2*tan(delta + atan(gamma_front))^2 + 2*a^2*b^2*z^2 - 6*R^2*b^2*z^2 + 2*R^2*a^2*z^2 + 2*a^4*z^2*tan(delta + atan(gamma_front))^2 - 2*a^4*z^2 + 4*R^3*a*b*z*tan(delta + atan(gamma_front))^2 - 4*R*a^3*b*z*tan(delta + atan(gamma_front))^2 - 4*R*a^2*b^2*z*tan(delta + atan(gamma_front))^2 - 4*R*a^2*b^2*z + 4*R^3*b^2*z*tan(delta + atan(gamma_front))^2 + 4*R^3*a*b*z - 4*R*a^3*b*z + 4*R^3*b^2*z + 2*R^2*a^2*b^2*tan(delta + atan(gamma_front))^2 + 4*R^2*a^3*b*tan(delta + atan(gamma_front))^2 - 2*R^4*a*b*tan(delta + atan(gamma_front))^2 - 2*a^5*b*tan(delta + atan(gamma_front))^2 - 2*R^4*a*b + 2*R^2*a^2*b^2 + 4*R^2*a^3*b + 2*R^2*a^4*tan(delta + atan(gamma_front))^2 + 2*R^2*a^4 - 2*a^5*b - a^4*b^2*tan(delta + atan(gamma_front))^2 - R^4*b^2*tan(delta + atan(gamma_front))^2 - R^4*a^2*tan(delta + atan(gamma_front))^2 - a^4*b^2 - R^4*b^2 - R^4*a^2 - a^6 - a^6*tan(delta + atan(gamma_front))^2, z, 4)^2*(R^2*a^2 + 7*R^2*b^2 - a^4 + a^2*b^2)*(a - b + a*tan(delta + atan(gamma_front))^2 - b*tan(delta + atan(gamma_front))^2))/(2*a^2*tan(delta + atan(gamma_front))*(a + b)*(R^2 - a^2)^2) - (4*R*b*(R^2*b^2 - a^4*tan(delta + atan(gamma_front))^2 + R^2*b^2*tan(delta + atan(gamma_front))^2)*root(2*a*b*z^4*tan(delta + atan(gamma_front))^2 + 2*a*b*z^4 - b^2*z^4*tan(delta + atan(gamma_front))^2 - a^2*z^4*tan(delta + atan(gamma_front))^2 - b^2*z^4 - a^2*z^4 - 4*R*a*b*z^3*tan(delta + atan(gamma_front))^2 + 4*R*b^2*z^3*tan(delta + atan(gamma_front))^2 - 4*R*a*b*z^3 + 4*R*b^2*z^3 + 2*a^2*b^2*z^2*tan(delta + atan(gamma_front))^2 - 6*R^2*b^2*z^2*tan(delta + atan(gamma_front))^2 + 2*R^2*a^2*z^2*tan(delta + atan(gamma_front))^2 + 2*a^2*b^2*z^2 - 6*R^2*b^2*z^2 + 2*R^2*a^2*z^2 + 2*a^4*z^2*tan(delta + atan(gamma_front))^2 - 2*a^4*z^2 + 4*R^3*a*b*z*tan(delta + atan(gamma_front))^2 - 4*R*a^3*b*z*tan(delta + atan(gamma_front))^2 - 4*R*a^2*b^2*z*tan(delta + atan(gamma_front))^2 - 4*R*a^2*b^2*z + 4*R^3*b^2*z*tan(delta + atan(gamma_front))^2 + 4*R^3*a*b*z - 4*R*a^3*b*z + 4*R^3*b^2*z + 2*R^2*a^2*b^2*tan(delta + atan(gamma_front))^2 + 4*R^2*a^3*b*tan(delta + atan(gamma_front))^2 - 2*R^4*a*b*tan(delta + atan(gamma_front))^2 - 2*a^5*b*tan(delta + atan(gamma_front))^2 - 2*R^4*a*b + 2*R^2*a^2*b^2 + 4*R^2*a^3*b + 2*R^2*a^4*tan(delta + atan(gamma_front))^2 + 2*R^2*a^4 - 2*a^5*b - a^4*b^2*tan(delta + atan(gamma_front))^2 - R^4*b^2*tan(delta + atan(gamma_front))^2 - R^4*a^2*tan(delta + atan(gamma_front))^2 - a^4*b^2 - R^4*b^2 - R^4*a^2 - a^6 - a^6*tan(delta + atan(gamma_front))^2, z, 4))/(tan(delta + atan(gamma_front))*(a + b)*(R^2 - a^2)^2*a^2) - (R*b*root(2*a*b*z^4*tan(delta + atan(gamma_front))^2 + 2*a*b*z^4 - b^2*z^4*tan(delta + atan(gamma_front))^2 - a^2*z^4*tan(delta + atan(gamma_front))^2 - b^2*z^4 - a^2*z^4 - 4*R*a*b*z^3*tan(delta + atan(gamma_front))^2 + 4*R*b^2*z^3*tan(delta + atan(gamma_front))^2 - 4*R*a*b*z^3 + 4*R*b^2*z^3 + 2*a^2*b^2*z^2*tan(delta + atan(gamma_front))^2 - 6*R^2*b^2*z^2*tan(delta + atan(gamma_front))^2 + 2*R^2*a^2*z^2*tan(delta + atan(gamma_front))^2 + 2*a^2*b^2*z^2 - 6*R^2*b^2*z^2 + 2*R^2*a^2*z^2 + 2*a^4*z^2*tan(delta + atan(gamma_front))^2 - 2*a^4*z^2 + 4*R^3*a*b*z*tan(delta + atan(gamma_front))^2 - 4*R*a^3*b*z*tan(delta + atan(gamma_front))^2 - 4*R*a^2*b^2*z*tan(delta + atan(gamma_front))^2 - 4*R*a^2*b^2*z + 4*R^3*b^2*z*tan(delta + atan(gamma_front))^2 + 4*R^3*a*b*z - 4*R*a^3*b*z + 4*R^3*b^2*z + 2*R^2*a^2*b^2*tan(delta + atan(gamma_front))^2 + 4*R^2*a^3*b*tan(delta + atan(gamma_front))^2 - 2*R^4*a*b*tan(delta + atan(gamma_front))^2 - 2*a^5*b*tan(delta + atan(gamma_front))^2 - 2*R^4*a*b + 2*R^2*a^2*b^2 + 4*R^2*a^3*b + 2*R^2*a^4*tan(delta + atan(gamma_front))^2 + 2*R^2*a^4 - 2*a^5*b - a^4*b^2*tan(delta + atan(gamma_front))^2 - R^4*b^2*tan(delta + atan(gamma_front))^2 - R^4*a^2*tan(delta + atan(gamma_front))^2 - a^4*b^2 - R^4*b^2 - R^4*a^2 - a^6 - a^6*tan(delta + atan(gamma_front))^2, z, 4)^3*(a^2*tan(delta + atan(gamma_front))^2 - 2*a*b + b^2*tan(delta + atan(gamma_front))^2 + a^2 + b^2 - 2*a*b*tan(delta + atan(gamma_front))^2))/(a^2*tan(delta + atan(gamma_front))*(a + b)*(R^2 - a^2)^2);
+% %  
+% % value = vpa(temp)
+end
