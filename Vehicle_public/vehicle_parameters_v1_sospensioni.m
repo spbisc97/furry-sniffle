@@ -1,4 +1,4 @@
-clear all
+clear all%#ok
 %% tyre parameters
 r=0.3;%wheel radius
 k_t=1.5e5; %longitudinal stiffness
